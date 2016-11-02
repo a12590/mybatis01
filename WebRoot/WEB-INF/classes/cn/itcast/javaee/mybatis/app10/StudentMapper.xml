@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itcast.javaee.mybatis.app10.Student">	
+
+	<resultMap type="cn.itcast.javaee.mybatis.app10.Student" id="studentMap">
+		<id property="id" column="students_id"/>
+		<result property="name" column="students_name"/>
+		<result property="sal" column="students_sal"/>
+	</resultMap>
+	
+	
+	<insert id="add" parameterType="cn.itcast.javaee.mybatis.app10.Student">
+		insert into students(students_id,students_name,students_sal) 
+		values(#{id},#{name},#{sal});
+	</insert>
+	
+	
+	<select id="findAllWithFy" parameterType="map" resultMap="studentMap">
+		select students_id,students_name,students_sal 
+		from students 
+		limit #{pstart},#{psize}
+	</select>
+	
+	
+	<select id="findAllByNameWithFy" parameterType="map" resultMap="studentMap">
+		select students_id,students_name,students_sal 
+		from students 
+		where students_name like #{pname}
+		limit #{pstart},#{psize}
+	</select>
+	
+	
+</mapper>
+
+
+
+

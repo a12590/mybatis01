@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studentNamespace">	
+
+	<resultMap type="cn.itcast.javaee.mybatis.app12.Student" id="studentMap">
+		<id property="id" column="students_id"/>
+		<result property="name" column="students_name"/>
+		<result property="sal" column="students_sal"/>
+	</resultMap>
+
+	<!-- set标签自动判断哪个是最后一个字段，会自动去掉最后一个,号 -->
+	<update id="dynaUpdate" parameterType="map">
+		update students 
+		<set>
+			<if test="pname!=null">
+				students_name = #{pname},
+			</if>
+			<if test="psal!=null">
+				students_sal = #{psal},			
+			</if>
+		</set>
+		where students_id = #{pid}
+	</update>
+	
+	
+</mapper>
+
+
+
+

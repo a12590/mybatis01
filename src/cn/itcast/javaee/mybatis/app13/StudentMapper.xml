@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studentNamespace">	
+
+	<resultMap type="cn.itcast.javaee.mybatis.app13.Student" id="studentMap">
+		<id property="id" column="students_id"/>
+		<result property="name" column="students_name"/>
+		<result property="sal" column="students_sal"/>
+	</resultMap>
+
+	
+	
+	<delete id="dynaDeleteArray">
+		delete from students where students_id in
+		<!-- foreach用于迭代数组元素
+			 open表示开始符号
+			 close表示结束符合
+			 separator表示元素间的分隔符
+			 item表示迭代的数组，属性值可以任意，但提倡与方法的数组名相同
+			 #{ids}表示数组中的每个元素值
+		 -->
+		<foreach collection="array" open="(" close=")" separator="," item="ids">
+			#{ids}
+		</foreach>
+	</delete>
+	
+	
+	
+	
+	<delete id="dynaDeleteList">
+		delete from students where students_id in
+		<foreach collection="list" open="(" close=")" separator="," item="ids">
+			#{ids}
+		</foreach>
+	</delete>
+	
+	
+	
+</mapper>
+
+
+
+
